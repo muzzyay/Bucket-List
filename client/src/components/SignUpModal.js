@@ -1,6 +1,8 @@
 import React from "react";
 import Alert from './alert';
-import { registerUser, loginUser } from "./jwt";
+import { registerUser, loginUser, setCurrentUser } from "./jwt";
+import setAuthToken from './setAuthToken';
+
 
 class SignUp extends React.Component {
 
@@ -39,7 +41,22 @@ class SignUp extends React.Component {
                     password: newUser.password
                 }
 
-                loginUser(newUserInfo);
+                loginUser(newUserInfo).then(res => {
+                    // Save to localStorage
+                    const { token } = res.data;
+                    // Set token to ls
+                    localStorage.setItem('jwtToken', token);
+                    // Set token to Auth header
+                    setAuthToken(token);
+                    // Decode token to get user data
+                   
+                    // Set current user
+                   setCurrentUser(token);
+              
+                   
+                   window.location.replace("/");
+              
+                  });
                 this.setState({
                     name: "",
                     email: "",

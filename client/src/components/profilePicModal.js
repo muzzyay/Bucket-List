@@ -1,7 +1,9 @@
 import React from "react";
 import { storage } from "./firebase";
 import axios from 'axios';
-import { setCurrentUser } from './jwt';
+import { setCurrentUser } from "./jwt";
+
+
 import Alert from './alert';
 
 const imageExts = ["jpg", "png", "jpeg"];
@@ -59,7 +61,10 @@ class profilePicModal extends React.Component {
                     pathReference.getDownloadURL().then(function (url) {
 
                         let currentUserId = setCurrentUser(localStorage.getItem('jwtToken')).payload.id;
-                        axios.put(`api/user/profilePicture/${currentUserId}`, { image: url }).then(res => window.location.reload()).catch(err => console.log(err));
+                        axios.put(`api/user/profilePicture/${currentUserId}`, { image: url }).then(res => {
+                            
+                            window.location.replace("/");
+                        }).catch(err => console.log(err));
 
 
 

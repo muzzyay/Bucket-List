@@ -1,6 +1,9 @@
 import React from "react";
-import { loginUser } from "./jwt";
+import { loginUser, setCurrentUser } from "./jwt";
+import setAuthToken from './setAuthToken';
 import Alert from './alert';
+
+
 
 class LogIn extends React.Component {
 
@@ -32,7 +35,23 @@ class LogIn extends React.Component {
             }
 
 
-            loginUser(userInfo).catch(err => {
+            loginUser(userInfo).then(res => {
+                // Save to localStorage
+                const { token } = res.data;
+                // Set token to ls
+                localStorage.setItem('jwtToken', token);
+                // Set token to Auth header
+                setAuthToken(token);
+                // Decode token to get user data
+               
+                // Set current user
+               setCurrentUser(token);
+
+               window.location.replace("/");
+          
+               
+          
+              }).catch(err => {
                 this.setState({errors: err.response.data});
                 localStorage.removeItem('jwtToken');
 
