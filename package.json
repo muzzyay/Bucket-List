@@ -4,10 +4,10 @@
   "description": "Mern Demo",
   "main": "server.js",
   "_comments": {
-    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev"
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev || node server.js"
   },
   "scripts": {
-    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start": "npm run start:prod",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "seed": "node scripts/seedDB.js",
     "client": "cd client && npm run start",
@@ -26,7 +26,6 @@
     "concurrently": "^4.1.0",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
-    "if-env": "^1.0.4",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.4.19",
     "passport": "^0.4.0",
