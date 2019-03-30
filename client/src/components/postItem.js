@@ -38,7 +38,9 @@ class postItem extends React.Component {
                             
                         </form>
 
-                        <button onClick={()=>this.props.handleFormSubmit(this.state.title)} data-dismiss="modal" class="btn btn-primary col-12"><i class="far fa-plus-square"></i> Post</button>
+                        <button onClick={()=>{this.props.handleFormSubmit(this.state.title);
+                        this.setState({title: ""});
+                        }} data-dismiss="modal" class="btn btn-primary col-12"><i class="far fa-plus-square"></i> Post</button>
 
                     </div>
                 </div>

@@ -91,9 +91,6 @@ class profilePicModal extends React.Component {
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">Upload a Profile Photo</h5>
-                        <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
                     </div>
                     <div className="modal-body">
                         <form>
@@ -119,7 +116,6 @@ class profilePicModal extends React.Component {
                         </form>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                         {this.state.valuenow === 100 ? <button id="done-btn"  onClick={this.handleDone} data-dismiss="modal" className="btn btn-primary">Done</button> : <button id="pic-btn" type="submit" onClick={this.handleSubmit} className="btn btn-primary">Submit</button>}
                     </div>
                 </div>
