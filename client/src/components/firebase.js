@@ -5,7 +5,6 @@
  
  axios.get("/api/user/apiKeys").then(res=> firebaseKey=res.data.firebase);
 
- // Initialize Firebase
  var config = {
     apiKey: firebaseKey,
     authDomain: "bucketlist-c3666.firebaseapp.com",

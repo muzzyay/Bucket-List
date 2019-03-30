@@ -14,7 +14,7 @@ class profilePicModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            valuenow: '',
+            valuenow: 0,
             width: '',
             text: '',
             errors: false
@@ -48,22 +48,15 @@ class profilePicModal extends React.Component {
                 this.setState({ valuenow: percentage, width: `${percentage}%`, text: `${Math.round(percentage)}%` })
 
 
-                // $(".progress-bar").attr("aria-valuenow", percentage);
-                // $(".progress-bar").attr("style", "width: " + percentage + "%");
-                // $(".progress-bar").text(Math.round(percentage) + "%");
+                
                 if (percentage === 100) {
-                    // $("#upload-btn").remove();
-                    // var status = $("<h5>").addClass("text-success").text("Photo is uploaded.");
-                    // $("#uploadBttn").append(status);
-
-
+                    
                     var pathReference = storage.ref('bucketlist/' + file.name);
-                    pathReference.getDownloadURL().then(function (url) {
+                    pathReference.getDownloadURL().then( (url) => {
 
                         let currentUserId = setCurrentUser(localStorage.getItem('jwtToken')).payload.id;
                         axios.put(`api/user/profilePicture/${currentUserId}`, { image: url }).then(res => {
-                            
-                            window.location.replace("/");
+                            this.props.changeImage(url);
                         }).catch(err => console.log(err));
 
 
@@ -82,6 +75,13 @@ class profilePicModal extends React.Component {
 
 
 
+    }
+
+    handleDone = ()=>{
+        this.setState({ valuenow: 0,
+            width: '',
+            text: '',
+            errors: false})
     }
 
 
@@ -120,7 +120,7 @@ class profilePicModal extends React.Component {
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button id="pic-btn" type="submit" onClick={this.handleSubmit} className="btn btn-primary ">Submit</button>
+                        {this.state.valuenow === 100 ? <button id="done-btn"  onClick={this.handleDone} data-dismiss="modal" className="btn btn-primary">Done</button> : <button id="pic-btn" type="submit" onClick={this.handleSubmit} className="btn btn-primary">Submit</button>}
                     </div>
                 </div>
             </div>

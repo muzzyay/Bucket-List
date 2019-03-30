@@ -2,7 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import setAuthToken from './setAuthToken';
 import jwt_decode from 'jwt-decode';
-import {Redirect} from "react-router-dom";
 
 
 
