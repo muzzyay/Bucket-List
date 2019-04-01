@@ -63,8 +63,9 @@ class CardBody extends React.Component {
                 <div className="card-body">
                     <h5 className="card-title">{this.props.title} {this.props.user && !this.props.profile ? <button onClick={!this.state.likes.includes(user.id) ? () => this.handleLikeBtn(this.props._id) : () => this.handleDislikeBtn(this.props._id)} className="btn btn-sm btn-primary">{this.state.likes.includes(user.id) ? <FontAwesomeIcon icon={faThumbsUp} /> : <FontAwesomeIcon icon={faThumbsDown}/>} {this.state.likes ? this.state.likes.length : 0}</button> : " "}</h5>
                     {this.props.user && !this.props.profile && !this.state.items.includes(this.props._id) ? <button onClick={() => this.saveItem(this.props._id)} className="btn btn-primary">Add</button> : " "}
-                    {this.props.user && this.props.profile ? <button onClick={() => this.props.removeItem(this.props._id)} className="btn btn-danger">Remove</button> : " "}
-                    {this.props.user && !this.props.isDone.includes(user.id) && this.props.profile ? <button onClick={() => this.props.itemDone(this.props._id)} className="btn btn-success ml-3">Done</button> : " "}
+                    {this.props.user && this.props.profile ? <button onClick={() => this.props.removeItem(this.props._id)} className="btn btn-outline-danger">Remove</button> : " "}
+                    {this.props.user && !this.props.isDone.includes(user.id) && this.props.profile ? <button onClick={() => this.props.itemDone(this.props._id)} className="btn btn-success ml-2">Done</button> : " "}
+                    {this.props.user && this.props.profile ? <button onClick={() => this.props.handleDelete(this.props._id)} className="btn btn-danger ml-2">Delete</button> : " "}
                 </div>
             </div>
 

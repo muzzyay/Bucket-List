@@ -11,6 +11,12 @@ const User = require("../../models/User");
 // Public
 router.get("/test", (req, res) => res.json({ msg: "Items Works" }));
 
+
+router.delete("/:id", (req, res)=>{
+
+  Item.findByIdAndDelete(req.params.id).then(data=>res.json(data)).catch(err=>res.json(err));
+})
+
 // GET api/items/
 // Retrieves all items
 // Public

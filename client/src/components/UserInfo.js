@@ -112,6 +112,20 @@ class UserInfo extends React.Component {
 
     };
 
+    handleDelete= item => {
+        let currentUserId = setCurrentUser(localStorage.getItem('jwtToken')).payload.id;
+
+        axios.delete(`/api/items/${item}`).then(res => {
+            
+            axios.get(`/api/user/populatedUser/${currentUserId}`).then(res => {
+                this.setState({ items: res.data.items });
+            });
+
+
+        }).catch(err => console.log(err));
+
+    }
+
 
 
 
@@ -144,7 +158,7 @@ class UserInfo extends React.Component {
 
                 <div className="row">
 
-                    {this.state.items.filter(item => item.isDone ? !item.isDone.includes(this.state.userId) : '').map(item => <CardBody profile={true} user={true} itemDone={this.itemDone} removeItem={this.removeItem} {...item} />)}
+                    {this.state.items.filter(item => item.isDone ? !item.isDone.includes(this.state.userId) : '').map(item => <CardBody profile={true} user={true} handleDelete={this.handleDelete} itemDone={this.itemDone} removeItem={this.removeItem} {...item} />)}
                 </div>
 
                 <div className="row mt-3">
@@ -154,7 +168,7 @@ class UserInfo extends React.Component {
                 </div>
 
                 <div className="row">
-                    {this.state.items.filter(item => item.isDone ? item.isDone.includes(this.state.userId) : '').map(item => <CardBody user={true} profile={true} isDone={this.isDone} removeItem={this.removeItem} {...item} />)}
+                    {this.state.items.filter(item => item.isDone ? item.isDone.includes(this.state.userId) : '').map(item => <CardBody user={true} profile={true} handleDelete={this.handleDelete} removeItem={this.removeItem} {...item} />)}
                 </div>
 
 
